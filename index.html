@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Filter App</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- MediaPipe CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/examples/jsm/loaders/GLTFLoader.js": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="loading" class="loading">
+        카메라와 AI 모델을 불러오는 중입니다
+      </div>
+
+      <div id="error" class="error" style="display: none">
+        오류가 발생했습니다. 브라우저를 새로고침해주세요.
+      </div>
+
+      <div class="video-container" style="display: none">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="canvas"></canvas>
+        <!-- 디버그 정보 패널 -->
+        <div id="debug-panel" class="debug-panel" style="display: none">
+          <div class="debug-info">
+            <h3>랜드마크 정보</h3>
+            <div id="debug-content"></div>
+          </div>
+        </div>
+      </div>
+      <div class="control-buttons-container color-controls">
+        <div id="color-filters-container" class="color-filters-wrapper">
+          <!-- 동적으로 생성됨 -->
+        </div>
+      </div>
+      <!-- 필터 버튼 컨테이너 -->
+      <div class="control-buttons-container filter-controls">
+        <button class="clear-btn" onclick="clearFilter()" title="필터 제거">
+          필터 제거
+        </button>
+        <button
+          class="debug-btn"
+          onclick="toggleDebugMode()"
+          title="디버그 모드"
+        >
+          🔍
+        </button>
+        <div class="controls" id="controls" style="display: none">
+          <!-- 동적으로 생성됨 -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
