@@ -1,6 +1,16 @@
 # Face Filter App
 
+[![Deploy to GitHub Pages](https://github.com/Tae2u2/Face-Filter/actions/workflows/deploy.yml/badge.svg)](https://github.com/Tae2u2/Face-Filter/actions/workflows/deploy.yml)
+[![CI](https://github.com/Tae2u2/Face-Filter/actions/workflows/ci.yml/badge.svg)](https://github.com/Tae2u2/Face-Filter/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Tae2u2/Face-Filter/actions/workflows/codeql.yml/badge.svg)](https://github.com/Tae2u2/Face-Filter/actions/workflows/codeql.yml)
+
 실시간 얼굴 인식 기반 AR 필터 웹 애플리케이션입니다. MediaPipe Face Mesh와 Three.js를 활용하여 다양한 필터와 이펙트를 제공합니다.
+
+## 🚀 라이브 데모
+
+**[https://tae2u2.github.io/Face-Filter/](https://tae2u2.github.io/Face-Filter/)**
+
+> 웹캠 권한을 허용하고 바로 체험해보세요!
 
 ## 주요 기능
 
