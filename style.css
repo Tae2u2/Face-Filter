@@ -68,25 +68,31 @@ body {
   //transform: scaleX(-1); /* 셀카 모드 */
 }
 
-.controls-container {
+.control-buttons-container {
   position: absolute;
   z-index: 99999;
-  transform: translateY(-100%);
-}
-
-.control-buttons-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   padding: 10px;
   gap: 10px;
 }
-
+.main-buttons {
+  width: 100%;
+  max-width: 660px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
 .filter-controls {
   margin-top: 10px;
   justify-content: flex-start;
+  transform: translateY(-100%);
 }
 
 .color-controls {
+  width: 100%;
+  max-width: 660px;
   justify-content: flex-start;
 }
 
@@ -106,6 +112,7 @@ body {
 
 .controls {
   width: 100%;
+  max-width: 660px;
   overflow-x: scroll;
   overflow-y: hidden;
   display: flex;
@@ -149,9 +156,8 @@ body {
 .debug-btn {
   background: linear-gradient(45deg, #636e72, #2d3436);
   border: none;
-  width: 80px;
-  padding: 10px;
-  height: 80px;
+  width: 30%;
+  height: 40px;
   border-radius: 10px;
   color: white;
   font-size: 1rem;

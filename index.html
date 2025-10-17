@@ -49,23 +49,25 @@
       </div>
       <!-- 필터 버튼 컨테이너 -->
       <div class="control-buttons-container filter-controls">
-        <button class="clear-btn" onclick="clearFilter()" title="필터 제거">
-          필터 제거
-        </button>
-        <button
-          class="capture-btn"
-          onclick="capturePhoto()"
-          title="사진 촬영"
-        >
-          📸
-        </button>
-        <button
-          class="debug-btn"
-          onclick="toggleDebugMode()"
-          title="디버그 모드"
-        >
-          🔍
-        </button>
+        <div class="main-buttons">
+          <button class="clear-btn" onclick="clearFilter()" title="필터 제거">
+            basic
+          </button>
+          <button
+            class="capture-btn"
+            onclick="capturePhoto()"
+            title="사진 촬영"
+          >
+            camera
+          </button>
+          <button
+            class="debug-btn"
+            onclick="toggleDebugMode()"
+            title="디버그 모드"
+          >
+            landmarks
+          </button>
+        </div>
         <div class="controls" id="controls" style="display: none">
           <!-- 동적으로 생성됨 -->
         </div>
