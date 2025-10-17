@@ -53,6 +53,13 @@
           필터 제거
         </button>
         <button
+          class="capture-btn"
+          onclick="capturePhoto()"
+          title="사진 촬영"
+        >
+          📸
+        </button>
+        <button
           class="debug-btn"
           onclick="toggleDebugMode()"
           title="디버그 모드"
@@ -61,6 +68,28 @@
         </button>
         <div class="controls" id="controls" style="display: none">
           <!-- 동적으로 생성됨 -->
+        </div>
+      </div>
+
+      <!-- 촬영 플래시 효과 -->
+      <div id="flash" class="flash"></div>
+
+      <!-- 촬영 미리보기 모달 -->
+      <div id="preview-modal" class="preview-modal" style="display: none">
+        <div class="preview-content">
+          <div class="preview-header">
+            <h3>촬영된 사진</h3>
+            <button class="preview-close" onclick="closePreview()">✕</button>
+          </div>
+          <img id="preview-image" class="preview-image" alt="촬영된 사진" />
+          <div class="preview-actions">
+            <button class="preview-btn download-btn" onclick="downloadPhoto()">
+              💾 저장하기
+            </button>
+            <button class="preview-btn share-btn" onclick="sharePhoto()">
+              📤 공유하기
+            </button>
+          </div>
         </div>
       </div>
     </div>

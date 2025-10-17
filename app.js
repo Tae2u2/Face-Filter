@@ -4,6 +4,7 @@ import { colorFilters } from "./js/config/colorFilterConfig.js";
 import { ImageLoader } from "./js/utils/imageLoader.js";
 import { FilterManager } from "./js/core/FilterManager.js";
 import { FaceDetector } from "./js/core/FaceDetector.js";
+import { CaptureManager } from "./js/core/CaptureManager.js";
 import { FilterRenderer } from "./js/renderers/FilterRenderer.js";
 import { UIController } from "./js/ui/UIController.js";
 
@@ -16,6 +17,7 @@ class FaceFilterApp {
     this.filterRenderer = new FilterRenderer(this.imageLoader);
     this.uiController = new UIController(filterButtons);
     this.faceDetector = new FaceDetector(this.onResults.bind(this));
+    this.captureManager = null; // 초기화 시 생성
 
     // DOM 요소
     this.canvas = null;
@@ -195,6 +197,24 @@ class FaceFilterApp {
   }
 
   /**
+   * 사진 촬영
+   */
+  capturePhoto() {
+    if (!this.captureManager) {
+      console.error("CaptureManager가 초기화되지 않았습니다.");
+      return;
+    }
+
+    try {
+      this.captureManager.capture(this.currentColorFilter);
+      this.captureManager.showPreview();
+    } catch (error) {
+      console.error("촬영 실패:", error);
+      alert(error.message || "사진 촬영에 실패했습니다.");
+    }
+  }
+
+  /**
    * 앱 초기화
    */
   async init() {
@@ -220,10 +240,13 @@ class FaceFilterApp {
       this.video = document.getElementById("video");
       this.ctx = this.canvas.getContext("2d");
 
-      // 6. 카메라 시작 (세로형)
+      // 6. CaptureManager 초기화
+      this.captureManager = new CaptureManager(this.video, this.canvas);
+
+      // 7. 카메라 시작 (세로형)
       await this.faceDetector.startCamera(this.video, 640, 480);
 
-      // 7. UI 업데이트
+      // 8. UI 업데이트
       this.uiController.hideLoading();
       this.uiController.showVideoControls();
     } catch (error) {
@@ -253,6 +276,30 @@ window.toggleColorFilter = (filterType) => {
 window.toggleDebugMode = () => {
   if (app) {
     app.toggleDebugMode();
+  }
+};
+
+window.capturePhoto = () => {
+  if (app) {
+    app.capturePhoto();
+  }
+};
+
+window.closePreview = () => {
+  if (app && app.captureManager) {
+    app.captureManager.closePreview();
+  }
+};
+
+window.downloadPhoto = () => {
+  if (app && app.captureManager) {
+    app.captureManager.download();
+  }
+};
+
+window.sharePhoto = async () => {
+  if (app && app.captureManager) {
+    await app.captureManager.share();
   }
 };
 

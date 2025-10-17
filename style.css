@@ -21,8 +21,8 @@ body {
 .video-container {
   position: relative;
   width: 100%;
-  min-height: 90vh;
-  overflow: hidden;
+  min-height: 80vh;
+  //overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,6 +144,7 @@ body {
 }
 
 .clear-btn,
+.capture-btn,
 .grayscale-btn,
 .debug-btn {
   background: linear-gradient(45deg, #636e72, #2d3436);
@@ -159,10 +160,25 @@ body {
 }
 
 .clear-btn:hover,
+.capture-btn:hover,
 .grayscale-btn:hover,
 .debug-btn:hover {
   transform: translateY(-1px);
   background: linear-gradient(45deg, #74b9ff, #0984e3);
+}
+
+.capture-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+  font-size: 1.5rem;
+}
+
+.capture-btn:hover {
+  background: linear-gradient(45deg, #ff7979, #ff6348);
+  transform: scale(1.05);
+}
+
+.capture-btn:active {
+  transform: scale(0.95);
 }
 
 .debug-btn.active {
@@ -274,19 +290,144 @@ body {
   margin: 20px 0;
 }
 
+/* 플래시 효과 */
+.flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 999999;
+}
+
+/* 미리보기 모달 */
+.preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100001;
+  padding: 20px;
+}
+
+.preview-content {
+  background: white;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.preview-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.preview-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+}
+
+.preview-close:hover {
+  color: #333;
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  background: #000;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.preview-btn {
+  flex: 1;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 200px;
+}
+
+.download-btn {
+  background: linear-gradient(45deg, #0984e3, #74b9ff);
+  color: white;
+}
+
+.download-btn:hover {
+  background: linear-gradient(45deg, #74b9ff, #0984e3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(9, 132, 227, 0.4);
+}
+
+.share-btn {
+  background: linear-gradient(45deg, #00b894, #55efc4);
+  color: white;
+}
+
+.share-btn:hover {
+  background: linear-gradient(45deg, #55efc4, #00b894);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.4);
+}
+
 @media (max-width: 768px) {
-  .container {
-    padding: 20px;
-    margin: 10px;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
   .filter-btn,
-  .clear-btn {
+  .clear-btn,
+  .capture-btn {
     padding: 10px 15px;
     font-size: 0.9rem;
+  }
+
+  .preview-content {
+    max-height: 95vh;
+  }
+
+  .preview-actions {
+    flex-direction: column;
+  }
+
+  .preview-btn {
+    max-width: 100%;
+  }
+
+  .preview-image {
+    max-height: 70vh;
   }
 }
