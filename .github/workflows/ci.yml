@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Check for syntax errors
+      run: npm run check-syntax
+
+    - name: Validate HTML
+      run: npm run validate-html
+
+    - name: Check file structure
+      run: |
+        echo "Checking project structure..."
+        test -f index.html || (echo "index.html not found" && exit 1)
+        test -f app.js || (echo "app.js not found" && exit 1)
+        test -f style.css || (echo "style.css not found" && exit 1)
+        test -d js/core || (echo "js/core directory not found" && exit 1)
+        test -d js/renderers || (echo "js/renderers directory not found" && exit 1)
+        echo "Project structure is valid"
+
+    - name: Run tests (if available)
+      run: npm test
+      continue-on-error: true

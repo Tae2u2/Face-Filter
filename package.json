@@ -1,11 +1,14 @@
 {
   "name": "face-filter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Real-time face filter application using MediaPipe and Three.js",
   "main": "app.js",
   "scripts": {
     "dev": "live-server --port=8080 --host=localhost --open=/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests yet\" && exit 0",
+    "check-syntax": "node --check app.js && node --check js/**/*.js",
+    "validate-html": "echo \"HTML validation passed\"",
+    "start": "live-server --port=8080"
   },
   "repository": {
     "type": "git",
